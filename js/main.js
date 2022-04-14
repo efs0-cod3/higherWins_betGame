@@ -1,8 +1,8 @@
 let btn = document.querySelector('#cards')
 let p1C = document.querySelector('.img1')
 let p2C = document.querySelector('.img2')
-let winner = document.querySelector('h3')
-let remCards = document.querySelector('h2')
+let winner = document.querySelector('.pointer')
+let remCards = document.querySelector('.rem')
 let scoreP1 = 0
 let scoreP2 = 0
 let score1text = document.querySelector('.score')
@@ -64,11 +64,11 @@ function drawCards() {
       let p2Val = Number(getVal(data.cards[1].value))
 
       if (p1Val > p2Val) {
-        winner.innerText = 'Player 1 Wins'
+        winner.innerText = `<-- Point for ${localStorage.getItem('playerName')}`
         getSc++
         localStorage.setItem('score1', getSc)
       } else if (p1Val < p2Val) {
-        winner.innerText = 'Player 2 Wins'
+        winner.innerText = 'Point for computer -->'
         getSc2++
         localStorage.setItem('score2', getSc2)
 
@@ -98,7 +98,7 @@ function endGame(){
     if(Number(localStorage.getItem('score1')) > Number(localStorage.getItem('score2'))){
       winner.innerText = `${localStorage.getItem('playerName')} IS THE MATCH WINNER`
     }else{
-      winner.innerText = `PLAYER 2 IS THE MATCH WINNER`
+      winner.innerText = `Beat by the odds!`
     }
 }
 
