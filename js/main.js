@@ -12,11 +12,21 @@ let reset = document.getElementById('reset').addEventListener('click', restartGa
 
 if(!localStorage.getItem('playerName')){
   let playerName = prompt('Instert Your name')
-localStorage.setItem('playerName',playerName)
+  if(playerName){
+    localStorage.setItem('playerName',playerName)
+  }else {
+    localStorage.setItem('playerName', 'Player 1')
+  }
+
 let pN =localStorage.getItem('playerName')
-if(pN){
+if(!pN){
+ localStorage.setItem('playerName', 'Player 1')
+  document.querySelector('#player').innerText =  pN
+
+} else{
   document.querySelector('#player').innerText = pN
-} 
+}
+
 }
 
 btn.addEventListener('click', drawCards)
@@ -86,7 +96,7 @@ p2C.src = localStorage.getItem('card2')
 
 function endGame(){
     if(Number(localStorage.getItem('score1')) > Number(localStorage.getItem('score2'))){
-      winner.innerText = `${playerName} IS THE MATCH WINNER`
+      winner.innerText = `${localStorage.getItem('playerName')} IS THE MATCH WINNER`
     }else{
       winner.innerText = `PLAYER 2 IS THE MATCH WINNER`
     }
@@ -114,3 +124,10 @@ function restartGame() {
     localStorage.setItem('score2', scoreP2)
   }
 }
+
+
+
+
+// function solution(str){
+//   return str.split('').reverse().join('');  
+// }
