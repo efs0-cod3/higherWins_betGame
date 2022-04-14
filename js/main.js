@@ -124,10 +124,3 @@ function restartGame() {
     localStorage.setItem('score2', scoreP2)
   }
 }
-
-
-
-
-// function solution(str){
-//   return str.split('').reverse().join('');  
-// }
