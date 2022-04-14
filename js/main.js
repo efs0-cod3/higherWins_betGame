@@ -9,6 +9,16 @@ let score1text = document.querySelector('.score')
 let score2text = document.querySelector('.score2')
 let reset = document.getElementById('reset').addEventListener('click', restartGame)
 
+
+if(!localStorage.getItem('playerName')){
+  let playerName = prompt('Instert Your name')
+localStorage.setItem('playerName',playerName)
+let pN =localStorage.getItem('playerName')
+if(pN){
+  document.querySelector('#player').innerText = pN
+} 
+}
+
 btn.addEventListener('click', drawCards)
 
 fetch(`https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1`)
@@ -24,7 +34,6 @@ fetch(`https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1`)
   .catch(err => {
     console.log(`error ${err}`)
   });
-
 
 function drawCards() {
   fetch(`https://deckofcardsapi.com/api/deck/${localStorage.getItem('deckId')}/draw/?count=2`)
@@ -57,7 +66,6 @@ function drawCards() {
         winner.innerText = 'Draw'
       }
 
-
       score1text.innerHTML = `Score: ${localStorage.getItem('score1')}`
       score2text.innerHTML = `Score: ${localStorage.getItem('score2')}`
 
@@ -78,12 +86,11 @@ p2C.src = localStorage.getItem('card2')
 
 function endGame(){
     if(Number(localStorage.getItem('score1')) > Number(localStorage.getItem('score2'))){
-      winner.innerText = `PLAYER 1 IS THE MATCH WINNER`
+      winner.innerText = `${playerName} IS THE MATCH WINNER`
     }else{
       winner.innerText = `PLAYER 2 IS THE MATCH WINNER`
     }
 }
-
 
 let getVal = (val) => {
   if (val === 'ACE') {
@@ -98,7 +105,6 @@ let getVal = (val) => {
     return val
   }
 }
-
 
 function restartGame() {
   location.reload()
